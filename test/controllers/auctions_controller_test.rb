@@ -1,34 +1,47 @@
 require 'test_helper'
 
 class AuctionsControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @auction = auctions(:auction1)
+  end
+
   test "should get index" do
-    get auctions_index_url
+    get auctions_path
     assert_response :success
   end
 
   test "should get show" do
-    get auctions_show_url
+    get auction_path(@auction)
     assert_response :success
   end
 
-  test "should get create" do
-    get auctions_create_url
+  test "should get new" do
+    get new_auction_path
     assert_response :success
   end
 
   test "should get edit" do
-    get auctions_edit_url
+    get edit_auction_path(@auction)
     assert_response :success
   end
 
-  test "should get update" do
-    get auctions_update_url
-    assert_response :success
+  test "update auction" do
+    patch auction_path(@auction), params: { auction: { title: "new title" } }
+    @auction.reload
+    assert_equal(@auction.title, "new title")
+    assert_redirected_to @auction
   end
 
-  test "should get delete" do
-    get auctions_delete_url
-    assert_response :success
+  test "create auction" do
+    assert_difference 'Auction.count', 1 do
+      post auctions_path, params: { auction: { title: "new auction", content: "content", price: 100 } }
+    end
   end
 
+  test "delete auction" do
+      assert_difference 'Auction.count', -1 do
+      delete auction_path(@auction)
+    end
+    assert_redirected_to root_path
+  end
 end

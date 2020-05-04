@@ -1,0 +1,5 @@
+auction1:
+  title: Auction test
+  content: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  price: 10.5
+  auction_price: 15.5
