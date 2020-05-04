@@ -1,2 +1,15 @@
-<h1>Auctions#show</h1>
-<p>Find me in app/views/auctions/show.html.erb</p>
+<div class="container mt-5">
+  <h1><%= @auction.title %></h1>
+
+  <p><%= @auction.content %></p>
+  <p><b>Original price:</b> $<%= @auction.price %></p>
+  <p><b>Current auction price:</b> $<%= @auction.auction_price %></p>
+
+<%= link_to "Delete",
+            auction_path(@auction),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+</div>
+
+
+

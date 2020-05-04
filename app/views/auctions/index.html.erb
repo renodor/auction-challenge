@@ -1,5 +1,13 @@
-<h1>All Auctions</h1>
+<div class="container mt-5">
+  <h1>All Auctions</h1>
 
-<% @auctions.each do |auction| %>
-  <%= auction %>
-<% end %>
+  <% @auctions.each do |auction| %>
+    <div class="auction-card">
+      <%= link_to auction_path(auction) do %>
+        <%= auction.title %>
+        <%= auction.content.truncate(50) %>
+        $<%= auction.price %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
