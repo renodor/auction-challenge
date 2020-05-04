@@ -2,12 +2,11 @@
   <h1>All Auctions</h1>
 
   <% @auctions.each do |auction| %>
-    <div class="auction-card">
-      <%= link_to auction_path(auction) do %>
-        <%= auction.title %>
-        <%= auction.content.truncate(50) %>
-        $<%= auction.price %>
-      <% end %>
+    <div class="auction-card d-flex justify-content-around">
+      <span><b><%= auction.title %></b></span>
+      <span class="grow-1"><%= auction.content.truncate(50) %></span>
+      <span><b>$<%= auction.price %></b></span>
+      <%= link_to "", auction_path(auction) %>
     </div>
   <% end %>
 </div>
