@@ -4,7 +4,7 @@
   <p><%= @auction.content %></p>
   <p>
     <b>Original price:</b>
-    <span class=<%= "crossed-text" if @auction.auction_price && @auction.auction_price > @auction.price%>>
+    <span class=<%= "crossed-text" if @auction.auction_price > @auction.price%>>
       $<%= @auction.price %>
     </span>
   </p>
@@ -13,7 +13,7 @@
   <h4>Propose new bidding?</h4>
   <%= simple_form_for @auction, url: url_for(action: 'bid', controller: 'auctions'), html: { class: "form-inline bidding-form"} do |f| %>
     <%= f.input :auction_price, label: false, input_html: {
-        value: @auction.auction_price ? @auction.auction_price + 1 : @auction.price + 1
+        value: @auction.auction_price > @auction.price ? @auction.auction_price + 1 : @auction.price + 1
       } %>
     <%= f.button :submit, 'Bid!', class: 'btn btn-secondary' %>
   <% end %>
