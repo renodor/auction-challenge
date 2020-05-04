@@ -1,6 +1,11 @@
 class AuctionsController < ApplicationController
   def index
-    @auctions = Auction.all
+    if params[:query].present?
+      sql_query = "title ILIKE :query OR content ILIKE :query"
+      @auctions = Auction.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @auctions = Auction.all
+    end
   end
 
   def show

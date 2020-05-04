@@ -1,5 +1,28 @@
 <div class="container mt-5">
-  <h1>All Auctions</h1>
+  <%= link_to root_path, class: "text-decoration-none" do %>
+    <h1>All Auctions</h1>
+  <% end %>
+
+  <div class="text-right mb-3">
+    <%= form_tag auctions_path, method: :get, novalidate: "novalidate", class: ""  do %>
+      <input name="utf8" type="hidden" value="&#x2713;" />
+      <div class="search-form-control form-group mb-0">
+        <%= text_field_tag :query,
+            params[:query],
+            class: "",
+            id: "search_query",
+            value: ""
+        %>
+        <%= button_tag(type: "submit", class: "btn btn-flat") do %>
+          <i class="fas fa-search"></i> Search
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if params[:query] && !params[:query].empty? %>
+    <p>Search results for "<%= params[:query] %>" </p>
+  <% end %>
 
   <% @auctions.each do |auction| %>
     <div class="auction-card d-flex justify-content-around">
